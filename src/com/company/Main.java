@@ -14,10 +14,10 @@ class Client implements Runnable {
     public void run() {
         while (true){
             synchronized (bank) {
-                bank.money -= 100;
+                bank.takeMoney(100);
             }
             synchronized (bank) {
-                bank.money += 100;
+                bank.putMoney(100);
             }
         }
     }
@@ -53,6 +53,12 @@ public class Main {
 
 class Bank {
     int money = 5000;
+    synchronized void takeMoney(int m){
+        money -= m;
+    }
+    synchronized void putMoney(int m){
+        money += m;
+    }
 }
 
 
